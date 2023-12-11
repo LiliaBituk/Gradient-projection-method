@@ -1,0 +1,216 @@
+WindowManager:
+    MainWindow:
+    InfoWindow:
+    GradientProjectionWindow:
+    ResultWindow:
+    GuideWindow:
+
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        cols: 2
+
+        Button:
+            id: Info
+            text: "Info"
+
+            color: 201/255, 76/255, 134/255, 1
+            font_size: 80
+            orientation: 'vertical'
+            background_normal: ''
+            background_color: 255/255, 178/255, 214/255, 1
+
+            on_release:
+                app.root.current = "info"
+                root.manager.transition.direction = "left"
+            on_press: self.background_down="#FFB2D6"
+
+        Button:
+            text: "Go"
+
+            color: 201/255, 76/255, 134/255, 1
+            font_size: 80
+            background_normal: ''
+            background_color: 255/255, 178/255, 214/255, 1
+
+            on_press: self.background_down="#FFB2D6"
+            on_release:
+                app.root.current = "diff"
+                root.manager.transition.direction = "left"
+
+<InfoWindow>:
+    name: "info"
+
+    GridLayout:
+        cols: 2
+
+        GridLayout:
+            rows: 2
+
+            Button:
+                text: "Back"
+                id: info_back_button
+
+                color: 201/255, 76/255, 134/255, 1
+                font_size: 50
+                background_normal: ''
+                background_color: 255/255, 178/255, 214/255, 1
+
+                on_press: self.background_down="#FFB2D6"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+
+
+        TextInput:
+            id: information
+
+            size_hint_x: None
+            width: info_back_button.texture_size[0] * 5
+
+            background_normal: ''
+            background_color: 255/255, 225/255, 239/255, 1
+            text: root.manager.INFO
+            foreground_color: 159/255, 62/255, 107/255, 1
+
+<ResultWindow>:
+    name: "result"
+
+    GridLayout:
+        rows: 3
+        canvas.before:
+            Color:
+                rgba: 201/255, 76/255, 134/255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            font_size: 50
+            id: result_label
+            text: "Result:"
+            color: 255/255, 178/255, 214/255, 1
+
+        Button:
+            font_size: 50
+            text: "Back"
+            on_release:
+                app.root.current = "diff"
+                root.manager.transition.direction = "right"
+            background_normal: ''
+            background_color: 255/255, 178/255, 214/255, 1
+            color: 201/255, 76/255, 134/255, 1
+
+        Button:
+            font_size: 50
+            text: "Graph"
+            on_release: root.showGraph()
+            background_normal: ''
+            background_color: 255/255, 178/255, 214/255, 1
+            color: 201/255, 76/255, 134/255, 1
+
+
+<GradientProjectionWindow>:
+    name: "diff"
+    matrix: matrix
+
+    GridLayout:
+        cols: 1
+
+        GridLayout:
+            rows: 5
+
+            Button:
+                text: "Back "
+
+                color: 201/255, 76/255, 134/255, 1
+                on_press: self.background_down="#FFB2D6"
+                font_size: 30
+
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+                background_normal: ''
+                background_color: 255/255, 178/255, 214/255, 1
+
+            Button:
+                id: clear_button
+                text: "Clear"
+
+                color: 201/255, 76/255, 134/255, 1
+                on_press: self.background_down="#FFB2D6"
+                font_size: 30
+
+                on_press: root.clear_button()
+                background_normal: ''
+                background_color: 255/255, 178/255, 214/255, 1
+
+            Button:
+                text: "Guide"
+
+                color: 201/255, 76/255, 134/255, 1
+                font_size: 30
+                orientation: 'vertical'
+                background_normal: ''
+                background_color: 255/255, 178/255, 214/255, 1
+
+                on_release:
+                    app.root.current = "guide"
+                    root.manager.transition.direction = "left"
+                on_press: self.background_down="#FFB2D6"
+
+            Button:
+                text: "Start"
+
+                color: 255/255, 178/255, 214/255, 1
+                on_press: self.background_down="#FFB2D6"
+                font_size: 50
+
+                on_press: root.getResult()
+                background_normal: ''
+                background_color: 201/255, 76/255, 134/255, 1
+
+        TextInput:
+            id: matrix
+            text: ''
+            foreground_color: 159/255, 62/255, 107/255, 1
+            size_hint_y: None
+            background_normal: ''
+            background_color: 255/255, 225/255, 239/255, 1
+
+<GuideWindow>:
+    name: "guide"
+
+    GridLayout:
+        cols: 2
+
+        GridLayout:
+            rows: 2
+
+            Button:
+                text: "Back"
+                id: info_back_button
+
+                color: 201/255, 76/255, 134/255, 1
+                font_size: 50
+                background_normal: ''
+                background_color: 255/255, 178/255, 214/255, 1
+
+                on_press: self.background_down="#FFB2D6"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+
+
+        TextInput:
+            id: information
+
+            size_hint_x: None
+            width: info_back_button.texture_size[0] * 5
+
+            background_normal: ''
+            background_color: 255/255, 225/255, 239/255, 1
+            text: root.manager.GUIDE
+            foreground_color: 159/255, 62/255, 107/255, 1
+
